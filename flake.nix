@@ -28,7 +28,12 @@
           checkPhase = "echo 'checkPhase: do nothing'"; # TODO: we should check we have a non-empty .wasm file here
           name = "prisma-fmt-wasm";
           src = ./.;
-          cargoSha256 = "sha256-fj0dmGS6/RFkOugH9zpTmlU+jXq6+EYoOGXeA9tr/Aw=";
+          cargoLock = {
+            lockFile = ./Cargo.lock;
+            outputHashes = {
+              "datamodel-0.1.0" = "sha256-x78DlMwedW0wfcBwBgDeUugYilCs1cxIMTtRBdFnAfg=";
+            };
+          };
           installPhase = ''
             echo 'creating out dir...'
             mkdir -p $out/src;
