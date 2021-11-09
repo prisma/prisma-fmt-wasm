@@ -26,6 +26,6 @@ pub fn preview_features() -> String {
 }
 
 #[wasm_bindgen]
-pub fn version(input: String) -> String {
-    todo!()
+pub fn version() -> String {
+    String::from("wasm")
 }

@@ -23,18 +23,22 @@
       in
       {
         defaultPackage = buildRustPackage {
-          buildPhase =
-            "RUSTC=${rust}/bin/rustc ${rust}/bin/cargo build --release --target=wasm32-unknown-unknown";
-          checkPhase = "echo 'checkPhase: do nothing'"; # TODO: we should check we have a non-empty .wasm file here
           name = "prisma-fmt-wasm";
           src = ./.;
+
+          buildInputs = [ pkgs.nodejs ];
           cargoLock = {
             lockFile = ./Cargo.lock;
             outputHashes = {
               "datamodel-0.1.0" = "sha256-x78DlMwedW0wfcBwBgDeUugYilCs1cxIMTtRBdFnAfg=";
             };
           };
-          installPhase = ''
+
+          buildPhase = ''
+            PATH=${rust}/bin:${pkgs.nodejs}/bin:$PATH
+
+            cargo build --release --target=wasm32-unknown-unknown
+
             echo 'creating out dir...'
             mkdir -p $out/src;
 
@@ -47,6 +51,8 @@
               --out-dir $out/src \
               target/wasm32-unknown-unknown/release/prisma_fmt_build.wasm;
           '';
+          checkPhase = "bash ${./check.sh}";
+          installPhase = "echo 'Install phase: skipped'";
         };
 
         packages = {
