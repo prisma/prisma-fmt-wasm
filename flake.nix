@@ -72,8 +72,7 @@
             export DATAMODEL_CHECKSUM_FILE=datamodel-0.1.0.sha256sum
 
             echo 'Syncing wasm-bindgen version in crate with that of the installed CLI...'
-            WASM_BINDGEN_CLI_VERSION=`nix run .#wasm-bindgen -- --version | awk '/wasm-bindgen/ {print $2}'`
-            sed -i "s/^wasm-bindgen\ =.*$/wasm-bindgen = \"=$WASM_BINDGEN_CLI_VERSION\"/" Cargo.toml
+            sed -i "s/^wasm-bindgen\ =.*$/wasm-bindgen = \"=${wasm-bindgen-cli.version}\"/" Cargo.toml
 
             echo 'Running cargo update...'
             nix run .#cargo update
