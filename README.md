@@ -12,7 +12,7 @@ warning.
 ## Example
 
 ```bash
-node -e "const prismaFmt = require('@prisma/prisma-fmt-wasm/prisma_fmt_build'); console.log(prismaFmt.version())"
+node -e "const prismaFmt = require('@prisma/prisma-fmt-wasm'); console.log(prismaFmt.version())"
 ```
 
 ## Components
