@@ -42,7 +42,10 @@
             mkdir -p $out/src;
 
             echo 'Copying package.json...'
-            cp ${./package.json} $out/package.json;
+            cp ./package.json $out/;
+
+            echo 'Copying README.md...'
+            cp README.md $out/;
 
             echo 'Generating node module...'
             wasm-bindgen \
