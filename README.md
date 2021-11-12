@@ -1,14 +1,18 @@
 # @prisma/prisma-fmt-wasm
 
 [![Publish pipeline](https://github.com/prisma/prisma-fmt-wasm/actions/workflows/publish-prisma-fmt-wasm.yml/badge.svg)](https://github.com/prisma/prisma-fmt-wasm/actions/workflows/publish-prisma-fmt-wasm.yml)
+![npm package](https://img.shields.io/npm/v/@prisma/prisma-fmt-wasm/latest)
 
 This repository only contains the build logic. All the functionality is
 implemented in [prisma-engines](https://github.com/prisma/prisma-engines/).
 
+The published package is internal to Prisma. Its API will break without prior
+warning.
+
 ## Example
 
 ```bash
-node -e "const prismaFmt = require('$out/src/prisma_fmt_build'); console.log(prismaFmt.version())"
+node -e "const prismaFmt = require('@prisma/prisma-fmt-wasm/prisma_fmt_build'); console.log(prismaFmt.version())"
 ```
 
 ## Components
