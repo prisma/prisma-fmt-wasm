@@ -1,5 +1,7 @@
 # @prisma/prisma-fmt-wasm
 
+[![Publish pipeline](https://github.com/prisma/prisma-fmt-wasm/actions/workflows/publish-prisma-fmt-wasm.yml/badge.svg)](https://github.com/prisma/prisma-fmt-wasm/actions/workflows/publish-prisma-fmt-wasm.yml)
+
 This repository only contains the build logic. All the functionality is
 implemented in [prisma-engines](https://github.com/prisma/prisma-engines/).
 
