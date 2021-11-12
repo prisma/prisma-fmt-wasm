@@ -5,6 +5,12 @@
 This repository only contains the build logic. All the functionality is
 implemented in [prisma-engines](https://github.com/prisma/prisma-engines/).
 
+## Example
+
+```bash
+node -e "const prismaFmt = require('$out/src/prisma_fmt_build'); console.log(prismaFmt.version())"
+```
+
 ## Components
 
 - The GitHub Actions workflow that is the reason for this repository: https://github.com/prisma/prisma-fmt-wasm/blob/main/.github/workflows/publish-prisma-fmt-wasm.yml

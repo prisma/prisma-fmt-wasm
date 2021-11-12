@@ -8,12 +8,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tomhoule/prisma-fmt-build.git"
+    "url": "https://github.com/prisma/prisma-fmt-wasm"
   },
   "author": "Prisma",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tomhoule/prisma-fmt-build/issues"
-  },
-  "homepage": "https://github.com/tomhoule/prisma-fmt-build#readme"
+  "homepage": "https://github.com/prisma/prisma-fmt-wasm"
 }
