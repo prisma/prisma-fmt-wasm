@@ -67,6 +67,27 @@
             type = "app";
             program = "${wasm-bindgen-cli}/bin/wasm-bindgen";
           };
+          # TODO: Replace writeShellScriptBin with writeShellApplication once it's released.
+          updateLocks = pkgs.writeShellScriptBin "updateLocks" ''
+            export DATAMODEL_CHECKSUM_FILE=datamodel-0.1.0.sha256sum
+
+            echo 'Syncing wasm-bindgen version in crate with that of the installed CLI'
+            WASM_BINDGEN_CLI_VERSION=`nix run .#wasm-bindgen -- --version | awk '/wasm-bindgen/ {print $2}'`
+            sed -i "s/^wasm-bindgen\ =.*$/wasm-bindgen = \"=$WASM_BINDGEN_CLI_VERSION\"/" Cargo.toml
+
+            echo 'Running cargo update...'
+            nix run .#cargo update
+
+            echo 'Setting up fake checksum so the build can fail and output the new hash...'
+            echo 'sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=' > \
+              $DATAMODEL_CHECKSUM_FILE
+
+            echo "Computing and inserting new datamodel checksum"
+            export DATAMODEL_CHECKSUM=`nix build 2>&1 1>&2 | awk '/got:/ {print $2}'`
+
+            echo "Installing new datamodel checksum: $DATAMODEL_CHECKSUM"
+            echo "$DATAMODEL_CHECKSUM" > $DATAMODEL_CHECKSUM_FILE
+          '';
         };
       });
 }
