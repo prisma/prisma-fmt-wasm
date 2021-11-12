@@ -24,8 +24,8 @@ jobs:
       run: |
         echo $THE_INPUT
 
-    # Update the cargo hash
-    - run: |
+    - name: Update Cargo.lock and engines source hash
+      run: |
         export DATAMODEL_CHECKSUM_FILE=datamodel-0.1.0.sha256sum
 
         echo 'cargo update...'
