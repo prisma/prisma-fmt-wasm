@@ -58,17 +58,6 @@ jobs:
     - run: nix build .
 
     #
-    # Commit
-    #
-
-    - uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: engines commit ${{ github.event.inputs.enginesHash }}
-        commit_user_name: prisma-bot
-        commit_user_email: prismabots@gmail.com
-        commit_author: prisma-bot <prismabots@gmail.com>
-
-    #
     # Publish
     #
 
@@ -82,6 +71,17 @@ jobs:
     - run: npm publish ./result --access public --tag ${{ github.event.inputs.npmDistTag }}
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    #
+    # Commit
+    #
+
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: engines commit ${{ github.event.inputs.enginesHash }}
+        commit_user_name: prisma-bot
+        commit_user_email: prismabots@gmail.com
+        commit_author: prisma-bot <prismabots@gmail.com>
 
     #
     # Failure handlers
