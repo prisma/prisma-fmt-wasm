@@ -28,7 +28,11 @@ jobs:
       run: |
         export DATAMODEL_CHECKSUM_FILE=datamodel-0.1.0.sha256sum
 
-        echo 'cargo update...'
+        echo 'Sync wasm-bindgen version in crate with that of the installed CLI'
+        WASM_BINDGEN_CLI_VERSION=`nix run .#wasm-bindgen -- --version | awk '/wasm-bindgen/ {print $2}'`
+        sed -i "s/^wasm-bindgen\ =.*$/wasm-bindgen = \"=$WASM_BINDGEN_CLI_VERSION\"/" Cargo.toml
+
+        echo 'Run cargo update...'
         nix run .#cargo update
 
         echo 'Setting up fake checksum so the build can fail and output the new hash...'

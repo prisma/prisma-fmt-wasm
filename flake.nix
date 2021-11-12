@@ -63,6 +63,10 @@
             type = "app";
             program = "${pkgs.nodePackages.npm}/bin/npm";
           };
+          wasm-bindgen = {
+            type = "app";
+            program = "${wasm-bindgen-cli}/bin/wasm-bindgen";
+          };
         };
       });
 }
