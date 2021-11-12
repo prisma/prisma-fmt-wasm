@@ -25,7 +25,6 @@
           name = "prisma-fmt-wasm";
           src = ./.;
 
-          buildInputs = [ pkgs.nodejs ];
           cargoLock = {
             lockFile = ./Cargo.lock;
             outputHashes = {
