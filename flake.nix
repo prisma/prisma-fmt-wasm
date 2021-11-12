@@ -97,7 +97,7 @@
             echo "Computing and inserting new datamodel checksum..."
             export DATAMODEL_CHECKSUM=`nix build 2>&1 1>&2 | awk '/got:/ {print $2}'`
 
-            echo "Installing new datamodel checksum: $DATAMODEL_CHECKSUM"
+            echo "Installing new datamodel checksum ($DATAMODEL_CHECKSUM)..."
             echo "$DATAMODEL_CHECKSUM" > $DATAMODEL_CHECKSUM_FILE
           '';
         };

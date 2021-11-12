@@ -20,7 +20,7 @@ echo ' ok.'
 
 echo '2. We can call the module directly and get back a valid result.'
 
-VERSION_FROM_MODULE=`node -e "const prismaFmt = require('$out/src/prisma_fmt_build'); console.log(prismaFmt.version())"`
+VERSION_FROM_MODULE=`node -e "const prismaFmt = require('$out'); console.log(prismaFmt.version())"`
 
 echo "VERSION_FROM_MODULE=$VERSION_FROM_MODULE"
 
