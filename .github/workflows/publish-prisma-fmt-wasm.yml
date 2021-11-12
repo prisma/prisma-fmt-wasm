@@ -20,7 +20,7 @@ jobs:
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
     - name: Print input
-      env: { THE_INPUT: '${{ toJson(github.event.client_payload) }}' }
+      env: { THE_INPUT: '${{ toJson(github.event) }}' }
       run: |
         echo $THE_INPUT
 
