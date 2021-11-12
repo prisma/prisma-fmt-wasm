@@ -31,7 +31,9 @@ jobs:
       run: nix run .#updateLocks
 
     - name: Update NPM package version
-      run: nix run .#updateNpmPackageVersion ${{ github.event.inputs.enginesWrapperVersion }}
+      run: nix run .#updateNpmPackageVersion 0.0.1
+      # run: nix run .#updateNpmPackageVersion ${{ github.event.inputs.enginesWrapperVersion }}
+      # hardcoding the version now for testing
 
     #
     # Build
