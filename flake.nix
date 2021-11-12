@@ -59,6 +59,12 @@
             type = "app";
             program = "${rust}/bin/cargo";
           };
+          # Takes the new package version as first and only argument, and updates package.json
+          updateNpmPackageVersion = pkgs.writeShellScriptBin "updateNpmPackageVersion" ''
+            ${pkgs.jq}/bin/jq ".version = \"$1\"" package.json > /tmp/package.json
+            rm package.json
+            cp /tmp/package.json package.json
+          '';
           npm = {
             type = "app";
             program = "${pkgs.nodePackages.npm}/bin/npm";
