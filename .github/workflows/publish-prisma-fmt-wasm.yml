@@ -8,7 +8,7 @@ on:
       enginesHash:
         required: false
       npmDistTag:
-        required: false
+        required: true
         default: "dev"
 
 jobs:
@@ -27,6 +27,10 @@ jobs:
         extra_nix_config: |
           experimental-features = nix-command flakes
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+    #
+    # Update repository for the new engines version and package version
+    #
 
     - name: Update Cargo.lock and engines source hash
       run: nix run .#updateLocks
@@ -74,6 +78,10 @@ jobs:
     - run: npm publish ./result --tag ${{ github.event.inputs.npmDistTag }}
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    #
+    # Failure handlers
+    #
 
     - name: Slack Notification on Failure
       if: ${{ failure() }}
