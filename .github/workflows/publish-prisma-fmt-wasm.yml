@@ -19,11 +19,6 @@ jobs:
           experimental-features = nix-command flakes
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-    - name: Print input
-      env: { THE_INPUT: '${{ toJson(github.event) }}' }
-      run: |
-        echo $THE_INPUT
-
     - name: Update Cargo.lock and engines source hash
       run: |
         export DATAMODEL_CHECKSUM_FILE=datamodel-0.1.0.sha256sum
@@ -56,22 +51,14 @@ jobs:
       with:
         node-version: '14.x'
 
-    # - run: bash .github/workflows/setup.sh
-    #   env:
-    #     CI: true
-    #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        # Optional but recommended, defaults to "Apply automatic changes"
-        commit_message: engines commit ${{ github.event.client_payload.commit }}
-
-        # Optional commit user and author settings
+        commit_message: engines commit ${{ github.event.inputs.enginesHash }}
         commit_user_name: prisma-bot
         commit_user_email: prismabots@gmail.com
         commit_author: prisma-bot <prismabots@gmail.com>
 
-    - run: npm publish result --access public
+    - run: npm publish result --tag $${{ github.event.inputs.enginesWrapperVersion }}
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
