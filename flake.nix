@@ -19,7 +19,6 @@
         rust = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain;
         buildRustPackage = pkgs.rustPlatform.buildRustPackage;
         wasm-bindgen-cli = pkgs.wasm-bindgen-cli;
-        fakeSha256 = pkgs.lib.fakeSha256;
       in
       {
         defaultPackage = buildRustPackage {
@@ -30,12 +29,13 @@
           cargoLock = {
             lockFile = ./Cargo.lock;
             outputHashes = {
-              "datamodel-0.1.0" = "sha256-x78DlMwedW0wfcBwBgDeUugYilCs1cxIMTtRBdFnAfg=";
+              "datamodel-0.1.0" = builtins.readFile ./datamodel-0.1.0.sha256sum;
             };
           };
 
           buildPhase = ''
-            PATH=${rust}/bin:${pkgs.nodejs}/bin:$PATH
+            PATH=${rust}/bin:${pkgs.nodejs}/bin:$PATH:${wasm-bindgen-cli}/bin
+            RUST_BACKTRACE=1
 
             cargo build --release --target=wasm32-unknown-unknown
 
@@ -46,7 +46,7 @@
             cp ${./package.json} $out/package.json;
 
             echo 'generating node module...'
-            RUST_BACKTRACE=1 ${wasm-bindgen-cli}/bin/wasm-bindgen \
+            wasm-bindgen \
               --target nodejs \
               --out-dir $out/src \
               target/wasm32-unknown-unknown/release/prisma_fmt_build.wasm;

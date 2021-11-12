@@ -1,6 +1,6 @@
 name: Build and publish @prisma/prisma-fmt-wasm
 
-on: workflow_dispatch # triggered manually for now
+on: workflow_dispatch
 
 jobs:
   build:
@@ -26,36 +26,36 @@ jobs:
 
     # Update the cargo hash
     - run: |
-        cd ./build-prisma-fmt
-        # Update dependencies (including engines).
+        export DATAMODEL_CHECKSUM_FILE=datamodel-0.1.0.sha256sum
+
+        echo 'cargo update...'
         nix run .#cargo update
-        # Set up build to fail and output the new hash.
-        echo "Setting up falkeSha256"
-        sed -i 's/cargoSha256.*/cargoSha256 = fakeSha256;/' flake.nix
-        # Extract the new dependencies source hash
-        echo "Computing and inserting new cargoHash"
-        CARGO_HASH=`nix build 2>&1 1>&2 | grep 'got:.*sha256' | sed 's/.*got:.*sha256/sha256/'`
-        echo "New cargo hash: $CARGO_HASH"
-        # Put the new cargo hash in flake.nix
-        sed -i "s,cargoSha256.*$,cargoSha256 = \"$CARGO_HASH\";," flake.nix
+
+        echo 'Setting up fake checksum so the build can fail and output the new hash...'
+        echo 'sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=' > \
+          $DATAMODEL_CHECKSUM_FILE
+
+        echo "Computing and inserting new datamodel checksum"
+        export DATAMODEL_CHECKSUM=`nix build 2>&1 1>&2 | awk '/got:/ {print $2}'`
+
+        echo "Installing new datamodel checksum: $DATAMODEL_CHECKSUM"
+        echo "$DATAMODEL_CHECKSUM" > $DATAMODEL_CHECKSUM_FILE
 
     # Build
     - run: nix build ./build-prisma-fmt
 
-    # Update the npm package version
-    - run: |
-        cd ./build-prisma-fmt
-        nix run .#npm version patch
-
+    #
     # Publish
+    #
+
     - uses: actions/setup-node@v2
       with:
         node-version: '14.x'
 
-    - run: bash .github/workflows/setup.sh
-      env:
-        CI: true
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    # - run: bash .github/workflows/setup.sh
+    #   env:
+    #     CI: true
+    #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:

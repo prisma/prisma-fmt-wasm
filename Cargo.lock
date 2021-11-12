@@ -148,7 +148,7 @@ dependencies = [
 [[package]]
 name = "datamodel"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#f59d9ce28dc40cc4c4500078bdec423ff03f0a8f"
+source = "git+https://github.com/prisma/prisma-engines#b87142e5515c261958e5af9cce98a3d7ee0b48ee"
 dependencies = [
  "bigdecimal",
  "chrono",
@@ -172,7 +172,7 @@ dependencies = [
 [[package]]
 name = "datamodel-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#f59d9ce28dc40cc4c4500078bdec423ff03f0a8f"
+source = "git+https://github.com/prisma/prisma-engines#b87142e5515c261958e5af9cce98a3d7ee0b48ee"
 dependencies = [
  "dml",
  "enumflags2",
@@ -193,7 +193,7 @@ dependencies = [
 [[package]]
 name = "dml"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#f59d9ce28dc40cc4c4500078bdec423ff03f0a8f"
+source = "git+https://github.com/prisma/prisma-engines#b87142e5515c261958e5af9cce98a3d7ee0b48ee"
 dependencies = [
  "chrono",
  "enumflags2",
@@ -332,9 +332,9 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "libc"
-version = "0.2.106"
+version = "0.2.107"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a60553f9a9e039a333b4e9b20573b9e9b9c0bb3a11e201ccc48ef4283456d673"
+checksum = "fbe5e23404da5b4f555ef85ebed98fb4083e55a00c317800bc2a50ede9f3d219"
 
 [[package]]
 name = "log"
@@ -366,7 +366,7 @@ checksum = "308cc39be01b73d0d18f82a0e7b2a3df85245f84af96fdddc5d202d27e47b86a"
 [[package]]
 name = "mongodb-datamodel-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#f59d9ce28dc40cc4c4500078bdec423ff03f0a8f"
+source = "git+https://github.com/prisma/prisma-engines#b87142e5515c261958e5af9cce98a3d7ee0b48ee"
 dependencies = [
  "datamodel-connector",
  "dml",
@@ -379,7 +379,7 @@ dependencies = [
 [[package]]
 name = "native-types"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#f59d9ce28dc40cc4c4500078bdec423ff03f0a8f"
+source = "git+https://github.com/prisma/prisma-engines#b87142e5515c261958e5af9cce98a3d7ee0b48ee"
 dependencies = [
  "serde",
  "serde_json",
@@ -479,7 +479,7 @@ dependencies = [
 [[package]]
 name = "prisma-fmt"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#f59d9ce28dc40cc4c4500078bdec423ff03f0a8f"
+source = "git+https://github.com/prisma/prisma-engines#b87142e5515c261958e5af9cce98a3d7ee0b48ee"
 dependencies = [
  "datamodel",
  "serde",
@@ -498,7 +498,7 @@ dependencies = [
 [[package]]
 name = "prisma-value"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#f59d9ce28dc40cc4c4500078bdec423ff03f0a8f"
+source = "git+https://github.com/prisma/prisma-engines#b87142e5515c261958e5af9cce98a3d7ee0b48ee"
 dependencies = [
  "base64",
  "bigdecimal",
@@ -598,9 +598,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.68"
+version = "1.0.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0f690853975602e1bfe1ccbf50504d67174e3bcf340f23b5ea9992e0587a52d8"
+checksum = "e466864e431129c7e0d3476b92f20458e5879919a0596c6472738d9fa2d342f8"
 dependencies = [
  "indexmap",
  "itoa",
@@ -623,7 +623,7 @@ dependencies = [
 [[package]]
 name = "sql-datamodel-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#f59d9ce28dc40cc4c4500078bdec423ff03f0a8f"
+source = "git+https://github.com/prisma/prisma-engines#b87142e5515c261958e5af9cce98a3d7ee0b48ee"
 dependencies = [
  "datamodel-connector",
  "dml",
@@ -717,9 +717,9 @@ dependencies = [
 
 [[package]]
 name = "tinyvec"
-version = "1.5.0"
+version = "1.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f83b2a3d4d9091d0abd7eba4dc2710b1718583bd4d8992e2190720ea38f391f7"
+checksum = "2c1c1d5a42b6245520c249549ec267180beaffcc0615401ac8e31853d4b6d8d2"
 dependencies = [
  "tinyvec_macros",
 ]
