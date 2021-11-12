@@ -1,5 +1,7 @@
 name: Build and publish @prisma/prisma-fmt-wasm
 
+concurrency: build-prisma-fmt-wasm
+
 on:
   workflow_dispatch:
     inputs:
