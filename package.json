@@ -2,7 +2,7 @@
   "name": "@prisma/prisma-fmt-wasm",
   "version": "3.5.0-25.0e4d0a36c14e3fcf6988f879c82f96a8f0aae54c",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/prisma_fmt_build.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
