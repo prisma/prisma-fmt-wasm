@@ -38,13 +38,13 @@
 
             cargo build --release --target=wasm32-unknown-unknown
 
-            echo 'creating out dir...'
+            echo 'Creating out dir...'
             mkdir -p $out/src;
 
-            echo 'copying package.json...'
+            echo 'Copying package.json...'
             cp ${./package.json} $out/package.json;
 
-            echo 'generating node module...'
+            echo 'Generating node module...'
             wasm-bindgen \
               --target nodejs \
               --out-dir $out/src \
