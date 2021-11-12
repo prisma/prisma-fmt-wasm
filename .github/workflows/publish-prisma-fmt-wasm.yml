@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       enginesWrapperVersion:
-        required: false
+        required: true
       enginesHash:
         required: false
       npmDistTag:
@@ -31,9 +31,16 @@ jobs:
       run: nix run .#updateLocks
 
     - name: Update NPM package version
-      run: nix run .#updateNpmPackageVersion 0.0.1
-      # run: nix run .#updateNpmPackageVersion ${{ github.event.inputs.enginesWrapperVersion }}
-      # hardcoding the version now for testing
+      run: |
+        ENGINES_WRAPPER_VERSION=${{ github.event.inputs.enginesWrapperVersion }};
+
+        if [[ $ENGINES_WRAPPER_VERSION == '' ]]; then
+          echo "Engines wrapper version is not defined"
+          exit 1
+        fi
+
+        echo "Updating the npm package version to $ENGINES_WRAPPER_VERSION"
+        nix run .#updateNpmPackageVersion ${{ github.event.inputs.enginesWrapperVersion }}
 
     #
     # Build
