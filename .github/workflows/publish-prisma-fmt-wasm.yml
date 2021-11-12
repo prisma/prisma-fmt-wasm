@@ -42,7 +42,7 @@ jobs:
         echo "$DATAMODEL_CHECKSUM" > $DATAMODEL_CHECKSUM_FILE
 
     # Build
-    - run: nix build ./build-prisma-fmt
+    - run: nix build .
 
     #
     # Publish
