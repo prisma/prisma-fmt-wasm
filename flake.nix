@@ -83,6 +83,10 @@
             echo 'Running cargo update...'
             nix run .#cargo update
 
+            if [[ $enginesHash != "" ]]; then
+              nix run .#cargo update -p datamodel --precise $enginesHash
+            fi
+
             echo 'Setting up fake checksum so the build can fail and output the new hash...'
             echo 'sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=' > \
               $DATAMODEL_CHECKSUM_FILE
