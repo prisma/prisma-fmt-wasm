@@ -9,6 +9,7 @@ on:
         required: false
       npmDistTag:
         required: false
+        default: "dev"
 
 jobs:
   build:
