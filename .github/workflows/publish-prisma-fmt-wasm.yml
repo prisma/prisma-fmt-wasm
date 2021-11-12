@@ -73,7 +73,7 @@ jobs:
         node-version: '14.x'
 
     - name: Set up NPM token
-      run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
     - run: npm publish ./result --tag ${{ github.event.inputs.npmDistTag }}
       env:
