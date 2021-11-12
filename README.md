@@ -14,3 +14,4 @@ implemented in [prisma-engines](https://github.com/prisma/prisma-engines/).
 - The [nix build definition](https://github.com/prisma/prisma-fmt-wasm/blob/main/flake.nix)
     - It gives us a fully reproducible, thoroughly described build process and environment. The alternative would be a bash script with installs through `rustup`, `cargo install` and `apt`, with underspecified system dependencies and best-effort version pinning.
     - You can read more about nix on [nix.dev](https://nix.dev/) and the [official website](https://nixos.org/).
+    - You can read more about `buildRustPackage` and how the prisma-engines dependency is pinned in [the nixpkgs docs](https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/rust.section.md).
