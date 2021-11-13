@@ -17,11 +17,10 @@
         overlays = [ (import rust-overlay) ];
         pkgs = import nixpkgs { inherit system overlays; };
         rust = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain;
-        buildRustPackage = pkgs.rustPlatform.buildRustPackage;
-        wasm-bindgen-cli = pkgs.wasm-bindgen-cli;
+        inherit (pkgs) wasm-bindgen-cli rustPlatform nodejs;
       in
       {
-        defaultPackage = buildRustPackage {
+        defaultPackage = rustPlatform.buildRustPackage {
           name = "prisma-fmt-wasm";
           src = ./.;
 
@@ -32,8 +31,9 @@
             };
           };
 
+          nativeBuildInputs = [ rust wasm-bindgen-cli nodejs ];
+
           buildPhase = ''
-            PATH=${rust}/bin:${pkgs.nodejs}/bin:$PATH:${wasm-bindgen-cli}/bin
             RUST_BACKTRACE=1
 
             cargo build --release --target=wasm32-unknown-unknown
@@ -53,7 +53,7 @@
               --out-dir $out/src \
               target/wasm32-unknown-unknown/release/prisma_fmt_build.wasm;
           '';
-          checkPhase = "bash ${./check.sh}";
+          checkPhase = "bash ./check.sh";
           installPhase = "echo 'Install phase: skipped'";
         };
 
@@ -70,13 +70,16 @@
           '';
           npm = {
             type = "app";
-            program = "${pkgs.nodePackages.npm}/bin/npm";
+            program = "${nodejs}/bin/npm";
           };
           wasm-bindgen = {
             type = "app";
             program = "${wasm-bindgen-cli}/bin/wasm-bindgen";
           };
-          # TODO: Replace writeShellScriptBin with writeShellApplication once it's released.
+          # Updates:
+          # - the wasm-bindgen version in Cargo.toml
+          # - Cargo.lock
+          # - datamodel-0.1.0.sha256sum
           updateLocks = pkgs.writeShellScriptBin "updateLocks" ''
             export DATAMODEL_CHECKSUM_FILE=datamodel-0.1.0.sha256sum
 
