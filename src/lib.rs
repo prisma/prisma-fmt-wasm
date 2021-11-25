@@ -29,3 +29,10 @@ pub fn preview_features() -> String {
 pub fn version() -> String {
     String::from("wasm")
 }
+
+/// Trigger a panic inside the wasm module. This is only useful in development for testing panic
+/// handling.
+#[wasm_bindgen]
+pub fn debug_panic() {
+    panic!("This is the panic triggered by `prisma_fmt::debug_panic()`");
+}

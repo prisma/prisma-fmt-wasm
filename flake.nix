@@ -7,6 +7,7 @@
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
   };
 
@@ -22,7 +23,8 @@
       {
         defaultPackage = rustPlatform.buildRustPackage {
           name = "prisma-fmt-wasm";
-          src = ./.;
+          # https://nix.dev/anti-patterns/language#reproducibility-referencing-top-level-directory-with
+          src = builtins.path { path = ./.; name = "tomhoule.com"; };
 
           cargoLock = {
             lockFile = ./Cargo.lock;
