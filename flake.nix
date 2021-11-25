@@ -78,6 +78,10 @@
             type = "app";
             program = "${wasm-bindgen-cli}/bin/wasm-bindgen";
           };
+          syncWasmBindgenVersions = pkgs.writeShellScriptBin "updateWasmBindgenVersion" ''
+            echo 'Syncing wasm-bindgen version in crate with that of the installed CLI...'
+            sed -i "s/^wasm-bindgen\ =.*$/wasm-bindgen = \"=${wasm-bindgen-cli.version}\"/" Cargo.toml
+          '';
           # Updates:
           # - the wasm-bindgen version in Cargo.toml
           # - Cargo.lock
@@ -85,8 +89,7 @@
           updateLocks = pkgs.writeShellScriptBin "updateLocks" ''
             export DATAMODEL_CHECKSUM_FILE=datamodel-0.1.0.sha256sum
 
-            echo 'Syncing wasm-bindgen version in crate with that of the installed CLI...'
-            sed -i "s/^wasm-bindgen\ =.*$/wasm-bindgen = \"=${wasm-bindgen-cli.version}\"/" Cargo.toml
+            nix run .#syncWasmBindgenVersions
 
             echo 'Running cargo update...'
             nix run .#cargo update
