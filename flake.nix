@@ -22,7 +22,8 @@
       {
         defaultPackage = rustPlatform.buildRustPackage {
           name = "prisma-fmt-wasm";
-          src = ./.;
+          # https://nix.dev/anti-patterns/language#reproducibility-referencing-top-level-directory-with
+          src = builtins.path { path = ./.; name = "tomhoule.com"; };
 
           cargoLock = {
             lockFile = ./Cargo.lock;
