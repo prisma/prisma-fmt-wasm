@@ -17,7 +17,7 @@
       let
         overlays = [ (import rust-overlay) ];
         pkgs = import nixpkgs { inherit system overlays; };
-        rust = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain;
+        rust = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
         inherit (pkgs) wasm-bindgen-cli rustPlatform nodejs;
       in
       {
