@@ -13,7 +13,6 @@
 
   outputs = { self, nixpkgs, flake-utils, rust-overlay }:
     flake-utils.lib.eachDefaultSystem (system:
-      with builtins;
       let
         overlays = [ (import rust-overlay) ];
         pkgs = import nixpkgs { inherit system overlays; };
@@ -24,7 +23,7 @@
         defaultPackage = rustPlatform.buildRustPackage {
           name = "prisma-fmt-wasm";
           # https://nix.dev/anti-patterns/language#reproducibility-referencing-top-level-directory-with
-          src = builtins.path { path = ./.; name = "tomhoule.com"; };
+          src = builtins.path { path = ./.; name = "prisma-fmt-wasm"; };
 
           cargoLock = {
             lockFile = ./Cargo.lock;
