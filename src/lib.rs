@@ -25,6 +25,15 @@ pub fn preview_features() -> String {
     prisma_fmt::preview_features()
 }
 
+/// The API is modelled on an LSP [completion
+/// request](https://github.com/microsoft/language-server-protocol/blob/gh-pages/_specifications/specification-3-16.md#textDocument_completion).
+/// Input and output are both JSON, the request being a `CompletionParams` object and the response
+/// being a `CompletionList` object.
+#[wasm_bindgen]
+pub fn text_document_completion(schema: String, params: String) -> String {
+    prisma_fmt::text_document_completion(&schema, params)
+}
+
 #[wasm_bindgen]
 pub fn version() -> String {
     String::from("wasm")
