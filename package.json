@@ -1,6 +1,6 @@
 {
   "name": "@prisma/prisma-fmt-wasm",
-  "version": "3.7.0-28.fe9b1e0aa6eec66a981ca8e073760777382d5c06",
+  "version": "3.7.0-29.eddf5a169554b90d2150778c2f5f79a0a3c3c7af",
   "description": "",
   "main": "src/prisma_fmt_build.js",
   "scripts": {
