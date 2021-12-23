@@ -2,7 +2,7 @@ use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 pub fn format(schema: String, params: String) -> String {
-    prisma_fmt::format(&input, &params)
+    prisma_fmt::format(&schema, &params)
 }
 
 #[wasm_bindgen]
