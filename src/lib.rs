@@ -1,8 +1,8 @@
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn format(input: String) -> String {
-    prisma_fmt::format(input)
+pub fn format(schema: String, params: String) -> String {
+    prisma_fmt::format(&input, &params)
 }
 
 #[wasm_bindgen]
@@ -31,7 +31,7 @@ pub fn preview_features() -> String {
 /// being a `CompletionList` object.
 #[wasm_bindgen]
 pub fn text_document_completion(schema: String, params: String) -> String {
-    prisma_fmt::text_document_completion(&schema, params)
+    prisma_fmt::text_document_completion(&schema, &params)
 }
 
 #[wasm_bindgen]
