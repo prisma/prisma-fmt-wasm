@@ -8,56 +8,58 @@ jobs:
     name: Update build dependencies
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2.3.4
 
-    - uses: actions/checkout@v2.3.4
+      # Install nix
+      # Copy-pasted from https://github.com/marketplace/actions/install-nix
+      - uses: cachix/install-nix-action@v14
+        with:
+          install_url: https://nixos-nix-install-tests.cachix.org/serve/vij683ly7sl95nnhb67bdjjfabclr85m/install
+          install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-    # Install nix
-    # Copy-pasted from https://github.com/marketplace/actions/install-nix
-    - uses: cachix/install-nix-action@v14
-      with:
-        install_url: https://nixos-nix-install-tests.cachix.org/serve/vij683ly7sl95nnhb67bdjjfabclr85m/install
-        install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
-        extra_nix_config: |
-          experimental-features = nix-command flakes
-          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+      #
+      # Update flake.lock
+      #
 
-    #
-    # Update flake.lock
-    #
-    
-    - run: nix flake update
+      - run: nix flake update
 
-    #
-    # Sync wasm-bindgen versions (nixpkgs and Cargo.toml)
-    #
-    
-    - run: 'nix run .#syncWasmBindgenVersions'
+      #
+      # Sync wasm-bindgen versions (nixpkgs and Cargo.toml)
+      #
 
-    #
-    # Build to confirm that this did not break the build.
-    #
-    
-    - run: nix build
+      - run: 'nix run .#syncWasmBindgenVersions'
 
-    #
-    # Commit
-    #
+      #
+      # Build to confirm that this did not break the build.
+      #
 
-    - uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Update system/build dependencies
-        commit_user_name: prisma-bot
-        commit_user_email: prismabots@gmail.com
-        commit_author: prisma-bot <prismabots@gmail.com>
+      - run: nix build
 
-    #
-    # Failure handlers
-    #
+      #
+      # Commit
+      #
 
-    - name: Slack Notification on Failure
-      if: ${{ failure() }}
-      uses: rtCamp/action-slack-notify@v2.2.0
-      env:
-        SLACK_TITLE: 'prisma-fmt-wasm update-system-dependencies failed :x:'
-        SLACK_COLOR: '#FF0000'
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update system/build dependencies
+          commit_user_name: prisma-bot
+          commit_user_email: prismabots@gmail.com
+          commit_author: prisma-bot <prismabots@gmail.com>
+
+      #
+      # Failure handlers
+      #
+
+      - name: Set current job url in SLACK_FOOTER env var
+        run: echo "SLACK_FOOTER=<$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID|Click here to go to the job logs>" >> $GITHUB_ENV
+
+      - name: Slack Notification on Failure
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_TITLE: 'prisma-fmt-wasm update-system-dependencies failed :x:'
+          SLACK_COLOR: '#FF0000'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
