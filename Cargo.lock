@@ -148,7 +148,7 @@ dependencies = [
 [[package]]
 name = "datamodel"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#4af4e703e6c7e418781fface6855e55b3cfa5cb8"
+source = "git+https://github.com/prisma/prisma-engines#bdaab3cd8d7127813ec3c7a12a0b5cc0f53cc81d"
 dependencies = [
  "bigdecimal",
  "chrono",
@@ -171,7 +171,7 @@ dependencies = [
 [[package]]
 name = "datamodel-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#4af4e703e6c7e418781fface6855e55b3cfa5cb8"
+source = "git+https://github.com/prisma/prisma-engines#bdaab3cd8d7127813ec3c7a12a0b5cc0f53cc81d"
 dependencies = [
  "diagnostics",
  "enumflags2",
@@ -183,7 +183,7 @@ dependencies = [
 [[package]]
 name = "diagnostics"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#4af4e703e6c7e418781fface6855e55b3cfa5cb8"
+source = "git+https://github.com/prisma/prisma-engines#bdaab3cd8d7127813ec3c7a12a0b5cc0f53cc81d"
 dependencies = [
  "colored",
  "pest",
@@ -202,7 +202,7 @@ dependencies = [
 [[package]]
 name = "dml"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#4af4e703e6c7e418781fface6855e55b3cfa5cb8"
+source = "git+https://github.com/prisma/prisma-engines#bdaab3cd8d7127813ec3c7a12a0b5cc0f53cc81d"
 dependencies = [
  "chrono",
  "enumflags2",
@@ -397,7 +397,7 @@ checksum = "308cc39be01b73d0d18f82a0e7b2a3df85245f84af96fdddc5d202d27e47b86a"
 [[package]]
 name = "mongodb-datamodel-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#4af4e703e6c7e418781fface6855e55b3cfa5cb8"
+source = "git+https://github.com/prisma/prisma-engines#bdaab3cd8d7127813ec3c7a12a0b5cc0f53cc81d"
 dependencies = [
  "datamodel-connector",
  "enumflags2",
@@ -409,7 +409,7 @@ dependencies = [
 [[package]]
 name = "native-types"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#4af4e703e6c7e418781fface6855e55b3cfa5cb8"
+source = "git+https://github.com/prisma/prisma-engines#bdaab3cd8d7127813ec3c7a12a0b5cc0f53cc81d"
 dependencies = [
  "serde",
  "serde_json",
@@ -460,7 +460,7 @@ checksum = "2839e79665f131bdb5782e51f2c6c9599c133c6098982a54c794358bf432529c"
 [[package]]
 name = "parser-database"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#4af4e703e6c7e418781fface6855e55b3cfa5cb8"
+source = "git+https://github.com/prisma/prisma-engines#bdaab3cd8d7127813ec3c7a12a0b5cc0f53cc81d"
 dependencies = [
  "diagnostics",
  "enumflags2",
@@ -519,7 +519,7 @@ dependencies = [
 [[package]]
 name = "prisma-fmt"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#4af4e703e6c7e418781fface6855e55b3cfa5cb8"
+source = "git+https://github.com/prisma/prisma-engines#bdaab3cd8d7127813ec3c7a12a0b5cc0f53cc81d"
 dependencies = [
  "datamodel",
  "log",
@@ -541,7 +541,7 @@ dependencies = [
 [[package]]
 name = "prisma-value"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#4af4e703e6c7e418781fface6855e55b3cfa5cb8"
+source = "git+https://github.com/prisma/prisma-engines#bdaab3cd8d7127813ec3c7a12a0b5cc0f53cc81d"
 dependencies = [
  "base64",
  "bigdecimal",
@@ -622,7 +622,7 @@ checksum = "73b4b750c782965c211b42f022f59af1fbceabdd026623714f104152f1ec149f"
 [[package]]
 name = "schema-ast"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#4af4e703e6c7e418781fface6855e55b3cfa5cb8"
+source = "git+https://github.com/prisma/prisma-engines#bdaab3cd8d7127813ec3c7a12a0b5cc0f53cc81d"
 dependencies = [
  "diagnostics",
  "pest",
@@ -687,7 +687,7 @@ dependencies = [
 [[package]]
 name = "sql-datamodel-connector"
 version = "0.1.0"
-source = "git+https://github.com/prisma/prisma-engines#4af4e703e6c7e418781fface6855e55b3cfa5cb8"
+source = "git+https://github.com/prisma/prisma-engines#bdaab3cd8d7127813ec3c7a12a0b5cc0f53cc81d"
 dependencies = [
  "datamodel-connector",
  "enumflags2",
@@ -729,9 +729,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "1.0.85"
+version = "1.0.86"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a684ac3dcd8913827e18cd09a68384ee66c1de24157e3c556c9ab16d85695fb7"
+checksum = "8a65b3f4ffa0092e9887669db0eae07941f023991ab58ea44da8fe8e2d511c6b"
 dependencies = [
  "proc-macro2",
  "quote",
