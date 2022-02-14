@@ -80,6 +80,7 @@
           syncWasmBindgenVersions = pkgs.writeShellScriptBin "updateWasmBindgenVersion" ''
             echo 'Syncing wasm-bindgen version in crate with that of the installed CLI...'
             sed -i "s/^wasm-bindgen\ =.*$/wasm-bindgen = \"=${wasm-bindgen-cli.version}\"/" Cargo.toml
+            cargo update --package wasm-bindgen
           '';
           # Updates:
           # - the wasm-bindgen version in Cargo.toml
