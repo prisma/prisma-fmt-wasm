@@ -1,6 +1,6 @@
 {
   "name": "@prisma/prisma-fmt-wasm",
-  "version": "3.10.0-33.migration-engine-print-notifications-to-print-requests-9cd8337d54330aa77f7773ef654f35583c822806",
+  "version": "3.10.0-34.1e2a986858a8bc0ad185ac8baf19fb72b382b7ec",
   "description": "",
   "main": "src/prisma_fmt_build.js",
   "scripts": {
