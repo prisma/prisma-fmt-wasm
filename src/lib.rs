@@ -5,6 +5,12 @@ pub fn format(schema: String, params: String) -> String {
     prisma_fmt::format(&schema, &params)
 }
 
+/// Docs: https://prisma.github.io/prisma-engines/doc/prisma_fmt/fn.get_config.html
+#[wasm_bindgen]
+pub fn get_config(params: String) -> String {
+    prisma_fmt::get_config(params)
+}
+
 #[wasm_bindgen]
 pub fn lint(input: String) -> String {
     prisma_fmt::lint(input)
