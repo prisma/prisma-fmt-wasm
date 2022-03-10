@@ -1,6 +1,6 @@
 {
   "name": "@prisma/prisma-fmt-wasm",
-  "version": "3.11.0-32.query-engine-mongodb-filters-6be2c1324e61a9c2ce32ea08bd362d8d6b070dca",
+  "version": "3.11.0-33.9cc249fc4466e191d7bb052895a96c896847ba16",
   "description": "",
   "main": "src/prisma_fmt_build.js",
   "scripts": {
