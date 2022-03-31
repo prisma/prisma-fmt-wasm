@@ -20,7 +20,7 @@
         inherit (pkgs) wasm-bindgen-cli rustPlatform nodejs;
       in
       {
-        defaultPackage = rustPlatform.buildRustPackage {
+        packages.default = rustPlatform.buildRustPackage {
           name = "prisma-fmt-wasm";
           # https://nix.dev/anti-patterns/language#reproducibility-referencing-top-level-directory-with
           src = builtins.path { path = ./.; name = "prisma-fmt-wasm"; };
@@ -58,17 +58,11 @@
           installPhase = "echo 'Install phase: skipped'";
         };
 
-        packages = {
+        apps = {
           cargo = {
             type = "app";
             program = "${rust}/bin/cargo";
           };
-          # Takes the new package version as first and only argument, and updates package.json
-          updateNpmPackageVersion = pkgs.writeShellScriptBin "updateNpmPackageVersion" ''
-            ${pkgs.jq}/bin/jq ".version = \"$1\"" package.json > /tmp/package.json
-            rm package.json
-            cp /tmp/package.json package.json
-          '';
           npm = {
             type = "app";
             program = "${nodejs}/bin/npm";
@@ -77,6 +71,15 @@
             type = "app";
             program = "${wasm-bindgen-cli}/bin/wasm-bindgen";
           };
+        };
+
+        packages = {
+          # Takes the new package version as first and only argument, and updates package.json
+          updateNpmPackageVersion = pkgs.writeShellScriptBin "updateNpmPackageVersion" ''
+            ${pkgs.jq}/bin/jq ".version = \"$1\"" package.json > /tmp/package.json
+            rm package.json
+            cp /tmp/package.json package.json
+          '';
           syncWasmBindgenVersions = pkgs.writeShellScriptBin "updateWasmBindgenVersion" ''
             echo 'Syncing wasm-bindgen version in crate with that of the installed CLI...'
             sed -i "s/^wasm-bindgen\ =.*$/wasm-bindgen = \"=${wasm-bindgen-cli.version}\"/" Cargo.toml
