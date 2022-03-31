@@ -1,0 +1,22 @@
+name: PR checks
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    name: Build checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Install nix
+      # Copy-pasted from https://github.com/marketplace/actions/install-nix
+      - uses: cachix/install-nix-action@v16
+
+      # Checks
+      - run: nix flake check .
+      - run: nix build .
+
