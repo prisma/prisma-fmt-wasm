@@ -87,6 +87,7 @@
           # - Cargo.lock
           # - datamodel-0.1.0.sha256sum
           updateLocks = pkgs.writeShellScriptBin "updateLocks" ''
+            set -euxo pipefail
             export DATAMODEL_CHECKSUM_FILE=datamodel-0.1.0.sha256sum
 
             nix run .#syncWasmBindgenVersions
@@ -95,7 +96,7 @@
             nix run .#cargo update
 
             if [[ $enginesHash != "" ]]; then
-              nix run .#cargo update -p datamodel --precise $enginesHash
+              nix run .#cargo -- update -p datamodel --precise $enginesHash
             fi
 
             echo 'Setting up fake checksum so the build can fail and output the new hash...'
