@@ -34,8 +34,7 @@ jobs:
 
       - name: Update Cargo.lock and engines source hash
         run: |
-          enginesHash="${{ github.event.inputs.enginesHash }}"
-          nix run .#updateLocks
+          enginesHash="${{ github.event.inputs.enginesHash }}" nix run .#updateLocks
 
       - name: Update NPM package version
         run: |
