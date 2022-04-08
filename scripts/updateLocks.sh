@@ -16,7 +16,7 @@ echo 'sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=' > \
   $DATAMODEL_CHECKSUM_FILE
 
 echo "Computing and inserting new datamodel checksum..."
-DATAMODEL_CHECKSUM=$(nix build 2>&1 1>&2 | awk '/got:/ {print $2}')
+DATAMODEL_CHECKSUM=$(nix build 2>&1 1>&2 | awk '/got:/ {print $2}' || true)
 export DATAMODEL_CHECKSUM
 
 echo "Installing new datamodel checksum ($DATAMODEL_CHECKSUM)..."
