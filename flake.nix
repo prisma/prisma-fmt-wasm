@@ -39,6 +39,8 @@
         };
 
         packages = {
+          inherit (pkgs) cargo;
+
           updateNpmPackageVersion = pkgs.writeShellApplication {
             name = "updateNpmPackageVersion";
             runtimeInputs = [ jq ];
@@ -50,10 +52,10 @@
               runtimeInputs = [ coreutils ];
               text = replaceStrings [ "$WASM_BINDGEN_VERSION" ] [ wasm-bindgen-cli.version ] template;
             };
-          updateLocks = pkgs.writeShellApplication {
-            name = "updateLocks";
+          updateDatamodelVersion = pkgs.writeShellApplication {
+            name = "updateDatamodelVersion";
             runtimeInputs = [ rust coreutils ];
-            text = readFile ./scripts/updateLocks.sh;
+            text = readFile ./scripts/updateDatamodelVersion.sh;
           };
         };
       });

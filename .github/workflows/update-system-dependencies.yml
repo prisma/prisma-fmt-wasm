@@ -24,6 +24,12 @@ jobs:
       - run: 'nix run .#syncWasmBindgenVersions'
 
       #
+      # Update other crate dependencies with `cargo update`
+      #
+
+      - run: nix run .#cargo update
+
+      #
       # Build to confirm that this did not break the build.
       #
 
