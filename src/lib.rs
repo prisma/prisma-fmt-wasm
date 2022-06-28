@@ -40,6 +40,16 @@ pub fn text_document_completion(schema: String, params: String) -> String {
     prisma_fmt::text_document_completion(&schema, &params)
 }
 
+/// This API is modelled on an LSP [code action
+/// request](https://github.com/microsoft/language-server-protocol/blob/gh-pages/_specifications/specification-3-16.md#textDocument_codeAction=).
+/// Input and output are both JSON, the request being a
+/// `CodeActionParams` object and the response being a list of
+/// `CodeActionOrCommand` objects.
+#[wasm_bindgen]
+pub fn code_actions(schema: String, params: String) -> String {
+    prisma_fmt::code_actions(&schema, &params)
+}
+
 #[wasm_bindgen]
 pub fn version() -> String {
     String::from("wasm")
