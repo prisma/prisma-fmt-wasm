@@ -15,7 +15,10 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         overlays = [ (import rust-overlay) ];
-        pkgs = import nixpkgs { inherit system overlays; };
+        pkgs = import nixpkgs {
+          inherit system overlays;
+          config.allowBroken = true;
+        };
         rust = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
         inherit (pkgs) wasm-bindgen-cli rustPlatform nodejs coreutils jq;
         inherit (builtins) path readFile replaceStrings;
