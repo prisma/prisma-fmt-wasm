@@ -30,6 +30,12 @@ jobs:
       - run: nix run .#cargo update
 
       #
+      # Check that the flake evaluates.
+      #
+
+      - run: nix flake check
+
+      #
       # Build to confirm that this did not break the build.
       #
 

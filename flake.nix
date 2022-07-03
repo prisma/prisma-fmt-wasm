@@ -15,17 +15,15 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         overlays = [ (import rust-overlay) ];
-        pkgs = import nixpkgs {
-          inherit system overlays;
-          config.allowBroken = true;
-        };
+        pkgs = import nixpkgs { inherit system overlays; };
         rust = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
         inherit (pkgs) wasm-bindgen-cli rustPlatform nodejs coreutils jq;
         inherit (builtins) path readFile replaceStrings;
       in
       {
-        packages.default = rustPlatform.buildRustPackage {
-          name = "prisma-fmt-wasm";
+        packages.default = let pname = "prisma-fmt-wasm"; in rustPlatform.buildRustPackage {
+          name = pname;
+          cargoDepsName = pname;
           # https://nix.dev/anti-patterns/language#reproducibility-referencing-top-level-directory-with
           src = path { path = ./.; name = "prisma-fmt-wasm"; };
 
@@ -60,6 +58,10 @@
             runtimeInputs = [ rust coreutils ];
             text = readFile ./scripts/updateDatamodelVersion.sh;
           };
+        };
+
+        devShell = pkgs.mkShell {
+          packages = [ rust ];
         };
       });
 }
