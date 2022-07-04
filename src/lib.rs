@@ -37,7 +37,7 @@ pub fn preview_features() -> String {
 /// being a `CompletionList` object.
 #[wasm_bindgen]
 pub fn text_document_completion(schema: String, params: String) -> String {
-    prisma_fmt::text_document_completion(&schema, &params)
+    prisma_fmt::text_document_completion(schema, &params)
 }
 
 /// This API is modelled on an LSP [code action
@@ -47,7 +47,7 @@ pub fn text_document_completion(schema: String, params: String) -> String {
 /// `CodeActionOrCommand` objects.
 #[wasm_bindgen]
 pub fn code_actions(schema: String, params: String) -> String {
-    prisma_fmt::code_actions(&schema, &params)
+    prisma_fmt::code_actions(schema, &params)
 }
 
 #[wasm_bindgen]
