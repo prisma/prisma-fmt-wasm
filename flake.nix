@@ -59,9 +59,5 @@
             text = readFile ./scripts/updateDatamodelVersion.sh;
           };
         };
-
-        devShell = pkgs.mkShell {
-          packages = [ rust ];
-        };
       });
 }
