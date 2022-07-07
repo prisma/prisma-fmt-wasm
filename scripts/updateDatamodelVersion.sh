@@ -3,6 +3,8 @@
 # - datamodel-0.1.0.sha256sum
 set -euxo pipefail
 export DATAMODEL_CHECKSUM_FILE=datamodel-0.1.0.sha256sum
+CARGO_HOME=$(mktemp -d)
+export CARGO_HOME
 
 if [[ ${enginesHash:?} != "" ]]; then
   echo "Updating to enginesHash=${enginesHash:?}"
